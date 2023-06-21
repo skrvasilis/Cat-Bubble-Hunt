@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import cat from "../assets/scared-cat.jpg";
+import cat2 from "../assets/cat2.jpg";
+import cat3 from "../assets/cat3.jpg";
+import cat4 from "../assets/cat4.jpg";
 import "../App.css";
 import { useContext } from "react";
 import MyContext from "../context/MyContext";
@@ -9,7 +12,7 @@ import MyContext from "../context/MyContext";
 const Shapes = ({ num }) => {
   const [componentArray, setComponentArray] = useState([]);
   const { setClickCount, setModalOpen } = useContext(MyContext);
-  const cats = [cat];
+  const cats = [cat, cat2, cat3, cat4];
 
   function handleResize() {
     console.log("run");
@@ -26,7 +29,7 @@ const Shapes = ({ num }) => {
       maxHorizontalItems = Math.floor(height / 45);
       maxVerticalItems = Math.floor(width / 40);
     } else {
-      maxHorizontalItems = Math.floor(height / 53);
+      maxHorizontalItems = Math.floor(height / 63);
       maxVerticalItems = Math.floor(width / 43);
     }
 
@@ -34,31 +37,23 @@ const Shapes = ({ num }) => {
     const newArray = Array.from({ length: count }, (_, index) => index);
     const arrStyled = newArray.map((item, i) => {
       if (width < 600) {
-        return  i === 0
-        ? { ...item, ...generateStyle("cat") }
-        : { ...item, ...generateStyle("small") };
+        return i === 0
+          ? { ...item, style :{...generateStyle("cat")}, cat :randomCat() }
+          : { ...item, style :{ ...generateStyle("small")} };
       } else {
         return i === 0
-          ? { ...item, ...generateStyle("cat") }
-          : { ...item, ...generateStyle() };
+          ? { ...item, style :{...generateStyle("cat")}, cat :randomCat() }
+          : { ...item, style :{ ...generateStyle()} };
       }
     });
     console.log(arrStyled);
     setComponentArray(arrStyled);
   }
 
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
   useEffect(() => {
     handleResize();
   }, []);
 
-  const [value, setValue] = useState(true);
   const randomMargin = () => {
     const num = Math.floor(Math.random() * (20 - 2) + 2);
     return num + "px";
@@ -70,12 +65,6 @@ const Shapes = ({ num }) => {
     );
   };
 
-  const polygons = [
-    "circle(50% at 50% 50%)",
-    "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-    "polygon(50% 0%, 0% 100%, 100% 100%)",
-    "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-  ];
 
   const colors = ["red", "yellow", "green", "pink", "blue", "violet", "blue"];
 
@@ -90,6 +79,10 @@ const Shapes = ({ num }) => {
 
       // setModalOpen(true);
     }
+  };
+
+  const randomCat = () => {
+    return cats[Math.floor(Math.random() * cats.length)];
   };
 
   const generateStyle = (str) => {
@@ -132,19 +125,18 @@ const Shapes = ({ num }) => {
     }
   };
 
+  console.log(componentArray);
+
   return (
     <div className="shapes">
       {/* <p style={{ color: "white" }}>{componentArray.length}</p> */}
       {componentArray.map((item, index) => {
         return (
           <div>
-            {" "}
-            <p key={index} onClick={(e) => clickHandler(e, index)} style={item}>
-              {" "}
-              {index === 0 && <img src={cats[0]} />}
+            <p key={index} onClick={(e) => clickHandler(e, index)} style={item.style}>
+              {index === 0 && <img src={item.cat} />}
             </p>
           </div>
-          // <Drag key={index} index={index}  clickHandler={clickHandler}/>
         );
       })}
     </div>

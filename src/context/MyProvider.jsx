@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useState, useEffect } from "react";
 import MyContext from "./MyContext";
 const MyProvider = ({ children }) => {
@@ -10,6 +11,7 @@ const MyProvider = ({ children }) => {
   useEffect(() => {
     let interval = null;
 
+    console.log("yes")
     if (isActive) {
       interval = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
@@ -21,7 +23,6 @@ const MyProvider = ({ children }) => {
     if (seconds === 0) {
       setIsActive(false);
       setSeconds(30)
-      setModalOpen(true)
     }
 
     return () => clearInterval(interval);
