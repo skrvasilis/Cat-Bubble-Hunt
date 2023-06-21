@@ -6,9 +6,10 @@
 
 .shapes {
   background-color: #282f27;
-
-  height: 100vh;
+  /* margin-top: 8vh; */
+  height: 92vh;
   width : 100%;
+  position: relative;
 }
 
 p {
@@ -30,4 +31,10 @@ img {
   width        : 40px;
   height       : 40px;
   border-radius: 50%;
+}
+
+
+.nav {
+  height : 8vh;
+  background-color: #55be47;
 }

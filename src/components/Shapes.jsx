@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import cat from "./assets/scared-cat.jpg";
-// import "./App.css";
-import Drag from "./Drag";
+import cat from "../assets/scared-cat.jpg";
+import "../App.css";
 
 const Shapes = ({ num }) => {
   const [componentArray, setComponentArray] = useState([]);
@@ -15,8 +14,8 @@ const Shapes = ({ num }) => {
     let height = window.innerHeight;
     let width = window.innerWidth;
 
-    const maxHorizontalItems = Math.floor(height / 30);
-    const maxVerticalItems = Math.floor(width / 53);
+    const maxHorizontalItems = Math.floor(height / 53);
+    const maxVerticalItems = Math.floor(width / 43);
 
     const count = maxHorizontalItems * maxVerticalItems;
     // if (count < 300) {
@@ -68,13 +67,7 @@ const Shapes = ({ num }) => {
     if (num !== 0) {
       setComponentArray(filtered);
     } else {
-      console.log("caaaatttt");
-      const arrStyled = filtered.map((item, i) => {
-        return i === 0
-          ? { ...item, ...generateStyle("cat") }
-          : { ...item, ...generateStyle() };
-      });
-      setComponentArray(arrStyled);
+      handleResize()
     }
   };
 

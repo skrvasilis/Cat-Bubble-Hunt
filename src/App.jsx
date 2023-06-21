@@ -1,21 +1,13 @@
-import { useId } from "react";
 import { useState } from "react";
-import BeforeDrag from "./BeforeDrag";
-
-import Drag from "./Drag";
-import Shapes from "./Shapes";
+import Nav from "./components/Nav";
+import Shapes from "./components/Shapes";
 
 function App() {
-
-  
-  
-  
-
   return (
     <>
-    {/* <BeforeDrag/> */}
-   <Shapes/>
-   </>
+      <Nav />
+      <Shapes />
+    </>
   );
 }
 
