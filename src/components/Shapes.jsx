@@ -29,8 +29,8 @@ const Shapes = ({ num }) => {
       maxHorizontalItems = Math.floor(height / 45);
       maxVerticalItems = Math.floor(width / 40);
     } else {
-      maxHorizontalItems = Math.floor(height / 63);
-      maxVerticalItems = Math.floor(width / 43);
+      maxHorizontalItems = Math.floor(height / 53);
+      maxVerticalItems = Math.floor(width / 33);
     }
 
     const count = maxHorizontalItems * maxVerticalItems;
@@ -38,12 +38,12 @@ const Shapes = ({ num }) => {
     const arrStyled = newArray.map((item, i) => {
       if (width < 600) {
         return i === 0
-          ? { ...item, style :{...generateStyle("cat")}, cat :randomCat() }
-          : { ...item, style :{ ...generateStyle("small")} };
+          ? { ...item, style: { ...generateStyle("cat") }, cat: randomCat() }
+          : { ...item, style: { ...generateStyle("small") } };
       } else {
         return i === 0
-          ? { ...item, style :{...generateStyle("cat")}, cat :randomCat() }
-          : { ...item, style :{ ...generateStyle()} };
+          ? { ...item, style: { ...generateStyle("cat") }, cat: randomCat() }
+          : { ...item, style: { ...generateStyle() } };
       }
     });
     console.log(arrStyled);
@@ -65,8 +65,16 @@ const Shapes = ({ num }) => {
     );
   };
 
-
-  const colors = ["red", "yellow", "green", "pink", "blue", "violet", "blue"];
+  const colors = [
+    "#e75656",
+    "#cfcf73",
+    "#64d164",
+    "pink",
+    "#5353ec",
+    "a364a3",
+    "#4d4dca",
+  ];
+  // const colors = ["red", "yellow", "#64d164", "pink", "#5353ec", "violet", "blue"];
 
   const clickHandler = (e, num) => {
     console.log(num);
@@ -129,14 +137,16 @@ const Shapes = ({ num }) => {
 
   return (
     <div className="shapes">
-      {/* <p style={{ color: "white" }}>{componentArray.length}</p> */}
+      <p>{componentArray.length}</p>
       {componentArray.map((item, index) => {
         return (
-          <div>
-            <p key={index} onClick={(e) => clickHandler(e, index)} style={item.style}>
-              {index === 0 && <img src={item.cat} />}
-            </p>
-          </div>
+          <p
+            key={index}
+            onClick={(e) => clickHandler(e, index)}
+            style={item.style}
+          >
+            {index === 0 && <img src={item.cat} />}
+          </p>
         );
       })}
     </div>
