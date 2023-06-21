@@ -2,6 +2,8 @@
   margin    : 0;
   padding   : 0;
   box-sizing: border-box;
+  font-family: system-ui;
+
 }
 
 .shapes {
@@ -34,7 +36,4 @@ img {
 }
 
 
-.nav {
-  height : 8vh;
-  background-color: #55be47;
-}
+

@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import cat from "../assets/scared-cat.jpg";
 import "../App.css";
+import { useContext } from "react";
+import MyContext from "../context/MyContext";
 
 const Shapes = ({ num }) => {
   const [componentArray, setComponentArray] = useState([]);
-
+  const {setClickCount , setModalOpen} = useContext(MyContext)
   // const [initialPosition, setInitialPosition]= useState({ x: `${Math.floor(Math.random() * (window.innerWidth - 90))}`, y: `${Math.floor(Math.random() * (window.innerHeight - 90))}` })
 
   function handleResize() {
@@ -66,8 +68,13 @@ const Shapes = ({ num }) => {
     const filtered = componentArray.filter((item, i) => i !== num);
     if (num !== 0) {
       setComponentArray(filtered);
+
     } else {
       handleResize()
+      setClickCount(prev=> prev+1)
+     
+        // setModalOpen(true);
+
     }
   };
 
@@ -82,7 +89,7 @@ const Shapes = ({ num }) => {
         clipPath: "circle(50% at 50% 50%)",
         position: "absolute",
         left: `${Math.floor(Math.random() * (window.innerWidth - 90))}px`,
-        top: `${Math.floor(Math.random() * (window.innerHeight - 90))}px`,
+        top: `${Math.floor(Math.random() * (window.innerHeight - 120))}px`,
       };
     } else {
       return {
@@ -94,7 +101,7 @@ const Shapes = ({ num }) => {
         clipPath: "circle(50% at 50% 50%)",
         position: "absolute",
         left: `${Math.floor(Math.random() * (window.innerWidth - 90))}px`,
-        top: `${Math.floor(Math.random() * (window.innerHeight - 90))}px`,
+        top: `${Math.floor(Math.random() * (window.innerHeight - 120))}px`,
       };
     }
   };
