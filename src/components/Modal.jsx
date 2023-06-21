@@ -16,7 +16,7 @@ const Modal = () => {
     setModalOpen(false);
     setClickCount(0);
     setLevel((prev) => prev + 1);
-    setIsActive(true);
+    // setIsActive(true);
   };
 
   const getRandomCoordinate = () => {
