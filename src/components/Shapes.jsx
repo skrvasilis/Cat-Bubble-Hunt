@@ -108,7 +108,7 @@ const Shapes = ({ num }) => {
 
   return (
     <div className="shapes">
-      <p style={{ color: "white" }}>{componentArray.length}</p>
+      {/* <p style={{ color: "white" }}>{componentArray.length}</p> */}
       {componentArray.map((item, index) => {
         return (
           <div>
@@ -117,7 +117,6 @@ const Shapes = ({ num }) => {
               key={index}
               onClick={(e) => clickHandler(e, index)}
               style={item}
-              // style={index === 0 ? generateStyle("cat") : generateStyle()}
             >
               {" "}
               {index === 0 && <img src={cat} />}
