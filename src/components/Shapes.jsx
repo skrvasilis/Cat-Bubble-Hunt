@@ -8,24 +8,40 @@ import MyContext from "../context/MyContext";
 
 const Shapes = ({ num }) => {
   const [componentArray, setComponentArray] = useState([]);
-  const {setClickCount , setModalOpen} = useContext(MyContext)
-  // const [initialPosition, setInitialPosition]= useState({ x: `${Math.floor(Math.random() * (window.innerWidth - 90))}`, y: `${Math.floor(Math.random() * (window.innerHeight - 90))}` })
+  const { setClickCount, setModalOpen } = useContext(MyContext);
+  const cats = [cat];
 
   function handleResize() {
     console.log("run");
     let height = window.innerHeight;
     let width = window.innerWidth;
 
-    const maxHorizontalItems = Math.floor(height / 53);
-    const maxVerticalItems = Math.floor(width / 43);
+    console.log(width);
+
+    let maxHorizontalItems = 0;
+
+    let maxVerticalItems = 0;
+
+    if (width < 600) {
+      maxHorizontalItems = Math.floor(height / 45);
+      maxVerticalItems = Math.floor(width / 40);
+    } else {
+      maxHorizontalItems = Math.floor(height / 53);
+      maxVerticalItems = Math.floor(width / 43);
+    }
 
     const count = maxHorizontalItems * maxVerticalItems;
-    // if (count < 300) {
     const newArray = Array.from({ length: count }, (_, index) => index);
     const arrStyled = newArray.map((item, i) => {
-      return i === 0
+      if (width < 600) {
+        return  i === 0
         ? { ...item, ...generateStyle("cat") }
-        : { ...item, ...generateStyle() };
+        : { ...item, ...generateStyle("small") };
+      } else {
+        return i === 0
+          ? { ...item, ...generateStyle("cat") }
+          : { ...item, ...generateStyle() };
+      }
     });
     console.log(arrStyled);
     setComponentArray(arrStyled);
@@ -68,13 +84,11 @@ const Shapes = ({ num }) => {
     const filtered = componentArray.filter((item, i) => i !== num);
     if (num !== 0) {
       setComponentArray(filtered);
-
     } else {
-      handleResize()
-      setClickCount(prev=> prev+1)
-     
-        // setModalOpen(true);
+      handleResize();
+      setClickCount((prev) => prev + 1);
 
+      // setModalOpen(true);
     }
   };
 
@@ -91,6 +105,18 @@ const Shapes = ({ num }) => {
         left: `${Math.floor(Math.random() * (window.innerWidth - 90))}px`,
         top: `${Math.floor(Math.random() * (window.innerHeight - 120))}px`,
       };
+    } else if (str === "small") {
+      return {
+        padding: randomMargin(),
+        border: "none",
+        backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+        boxShadow: "5px 5px 5px white",
+        //   clipPath: polygons[Math.floor(Math.random() * polygons.length)],
+        clipPath: "circle(50% at 50% 50%)",
+        position: "absolute",
+        left: `${Math.floor(Math.random() * (window.innerWidth - 40))}px`,
+        top: `${Math.floor(Math.random() * (window.innerHeight - 80))}px`,
+      };
     } else {
       return {
         padding: randomMargin(),
@@ -100,8 +126,8 @@ const Shapes = ({ num }) => {
         //   clipPath: polygons[Math.floor(Math.random() * polygons.length)],
         clipPath: "circle(50% at 50% 50%)",
         position: "absolute",
-        left: `${Math.floor(Math.random() * (window.innerWidth - 90))}px`,
-        top: `${Math.floor(Math.random() * (window.innerHeight - 120))}px`,
+        left: `${Math.floor(Math.random() * (window.innerWidth - 60))}px`,
+        top: `${Math.floor(Math.random() * (window.innerHeight - 110))}px`,
       };
     }
   };
@@ -113,13 +139,9 @@ const Shapes = ({ num }) => {
         return (
           <div>
             {" "}
-            <p
-              key={index}
-              onClick={(e) => clickHandler(e, index)}
-              style={item}
-            >
+            <p key={index} onClick={(e) => clickHandler(e, index)} style={item}>
               {" "}
-              {index === 0 && <img src={cat} />}
+              {index === 0 && <img src={cats[0]} />}
             </p>
           </div>
           // <Drag key={index} index={index}  clickHandler={clickHandler}/>
