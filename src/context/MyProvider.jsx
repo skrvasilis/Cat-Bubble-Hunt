@@ -23,6 +23,7 @@ const MyProvider = ({ children }) => {
     if (seconds === 0) {
       setIsActive(false);
       setSeconds(30)
+      setModalOpen(true)
     }
 
     return () => clearInterval(interval);
