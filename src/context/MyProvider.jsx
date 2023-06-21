@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import MyContext from "./MyContext";
 const MyProvider = ({ children }) => {
-    const [seconds, setSeconds] = useState(5);
+    const [seconds, setSeconds] = useState(30);
     const [isActive, setIsActive] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [level, setLevel] = useState(0);
