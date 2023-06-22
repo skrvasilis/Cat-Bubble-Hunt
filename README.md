@@ -4,7 +4,7 @@ Welcome to Cat Bubble Hunt, a fun game where you must find the bubble with the c
 
 The Cat Bubble Hunt is deployed and can be played online. You can access it at the following URL:
 
-[Play Bubble Cat Game]("https://cat-shapes.vercel.app/")
+[Play Bubble Cat Game](https://cat-shapes.vercel.app/)
 
 ## Technologies Used
 
