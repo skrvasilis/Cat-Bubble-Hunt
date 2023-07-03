@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-import MyContext from "../context/MyContext";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setSeconds,
+  setCounter,
+  setIsActive,
+  setModalOpen,
+} from "../redux/counterSlice";
 import "./modal.css";
 const Modal = () => {
-  const {
-    setClickCount,
-    setLevel,
-    clickCount,
-    setModalOpen,
-    level,
-    setIsActive,
-  } = useContext(MyContext);
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter.counter);
+  const isActive = useSelector((state) => state.counter.isActive);
+  const modalOpen = useSelector((state) => state.counter.modalOpen);
+  
 
   const closeModal = () => {
-    setModalOpen(false);
-    setClickCount(0);
-    setLevel((prev) => prev + 1);
-    setIsActive(true);
+    dispatch(setModalOpen(false));
+    dispatch(setCounter(0));
+    dispatch(setIsActive(true));
   };
 
   const getRandomCoordinate = () => {
@@ -28,7 +29,7 @@ const Modal = () => {
 
   return (
     <div>
-      {level === 0 ? (
+      {counter === 0 ? (
         <>
           <div className="modal">
             <div className="modal-content">
@@ -43,7 +44,14 @@ const Modal = () => {
                 <li>Be quick! You have a limited amount of time.</li>
                 <li>Each correct guess earns you points.</li>
               </ul>
+              {/* <div className="user">
+                <h3>username</h3>
+                <input type="text" /> */}
+
+              {/* </div> */}
               <button onClick={closeModal}>Start Game</button>
+              
+
               <div
                 className="circle"
                 style={{
@@ -71,7 +79,7 @@ const Modal = () => {
       ) : (
         <div className="modal">
           <div className="modal-content">
-            <h2>WOW!! You found {clickCount} cats!!</h2>
+            <h2>WOW!! You found {counter} cats!!</h2>
             <p>Would you like to play again?</p>
             <button onClick={closeModal}>Play Again</button>
           </div>

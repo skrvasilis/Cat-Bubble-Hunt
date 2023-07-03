@@ -1,17 +1,17 @@
-import { useContext } from "react";
-import { useState } from "react";
 import Modal from "./components/Modal";
 import Nav from "./components/Nav";
 import Shapes from "./components/Shapes";
-import MyContext from "./context/MyContext";
+import { useSelector } from "react-redux";
 
 function App() {
-  const {modalOpen} = useContext(MyContext)
+  const modalOpen = useSelector((state) => state.counter.modalOpen);
+  const counter = useSelector((state) => state.counter.counter);
+  console.log(counter)
   return (
     <>
       <Nav />
       <Shapes />
-      {modalOpen &&<Modal/> }
+      {modalOpen && <Modal />}
     </>
   );
 }

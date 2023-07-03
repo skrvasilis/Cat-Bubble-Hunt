@@ -6,20 +6,18 @@ import cat2 from "../assets/cat2.jpg";
 import cat3 from "../assets/cat3.jpg";
 import cat4 from "../assets/cat4.jpg";
 import "../App.css";
-import { useContext } from "react";
-import MyContext from "../context/MyContext";
+import { useSelector, useDispatch } from "react-redux";
+import { setCounter } from "../redux/counterSlice";
 
-const Shapes = ({ num }) => {
+const Shapes = () => {
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter.counter);
   const [componentArray, setComponentArray] = useState([]);
-  const { setClickCount, setModalOpen } = useContext(MyContext);
   const cats = [cat, cat2, cat3, cat4];
 
   function handleResize() {
-    console.log("run");
     let height = window.innerHeight;
     let width = window.innerWidth;
-
-    console.log(width);
 
     let maxHorizontalItems = 0;
 
@@ -46,7 +44,6 @@ const Shapes = ({ num }) => {
           : { ...item, style: { ...generateStyle() } };
       }
     });
-    console.log(arrStyled);
     setComponentArray(arrStyled);
   }
 
@@ -74,18 +71,14 @@ const Shapes = ({ num }) => {
     "a364a3",
     "#4d4dca",
   ];
-  // const colors = ["red", "yellow", "#64d164", "pink", "#5353ec", "violet", "blue"];
 
   const clickHandler = (e, num) => {
-    console.log(num);
     const filtered = componentArray.filter((item, i) => i !== num);
     if (num !== 0) {
       setComponentArray(filtered);
     } else {
       handleResize();
-      setClickCount((prev) => prev + 1);
-
-      // setModalOpen(true);
+      dispatch(setCounter(counter + 1));
     }
   };
 
@@ -100,9 +93,9 @@ const Shapes = ({ num }) => {
         border: "none",
         backgroundColor: colors[Math.floor(Math.random() * colors.length)],
         boxShadow: "5px 5px 5px white",
-        //   clipPath: polygons[Math.floor(Math.random() * polygons.length)],
         clipPath: "circle(50% at 50% 50%)",
         position: "absolute",
+        // zIndex : 1,
         left: `${Math.floor(Math.random() * (window.innerWidth - 90))}px`,
         top: `${Math.floor(Math.random() * (window.innerHeight - 120))}px`,
       };
@@ -112,19 +105,20 @@ const Shapes = ({ num }) => {
         border: "none",
         backgroundColor: colors[Math.floor(Math.random() * colors.length)],
         boxShadow: "5px 5px 5px white",
-        //   clipPath: polygons[Math.floor(Math.random() * polygons.length)],
+        transform: "translateZ(0)",
         clipPath: "circle(50% at 50% 50%)",
         position: "absolute",
         left: `${Math.floor(Math.random() * (window.innerWidth - 40))}px`,
         top: `${Math.floor(Math.random() * (window.innerHeight - 80))}px`,
+        opacity: 0.7,
       };
     } else {
       return {
         padding: randomMargin(),
         border: "none",
+        opacity: 0.8,
         backgroundColor: colors[Math.floor(Math.random() * colors.length)],
         boxShadow: "5px 5px 5px white",
-        //   clipPath: polygons[Math.floor(Math.random() * polygons.length)],
         clipPath: "circle(50% at 50% 50%)",
         position: "absolute",
         left: `${Math.floor(Math.random() * (window.innerWidth - 60))}px`,
@@ -132,8 +126,6 @@ const Shapes = ({ num }) => {
       };
     }
   };
-
-  console.log(componentArray);
 
   return (
     <div className="shapes">
